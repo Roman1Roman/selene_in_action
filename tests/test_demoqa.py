@@ -1,9 +1,9 @@
 import os
+
 from selene import browser, be, have
 
+
 def test_filling_form():
-
-
     browser.open('/automation-practice-form')
     browser.element('#firstName').should(be.blank).type('Roman')
     browser.element('#lastName').type('Bazaleev')
@@ -23,14 +23,7 @@ def test_filling_form():
     browser.element('#react-select-4-input').type('karn').press_enter()
     browser.element('#submit').press_enter()
     browser.element('tbody').all('tr td:nth-child(2)').should(have.texts('Roman Bazaleev', 'bazaleev.roma@ya.ru',
-                                                 'Male', '8005553535', '21 November,2001',
-                                                 'Computer Science, Physics', 'Sports, Reading',
-                                                 '1.jpg', 'Pushkina Kolotushkina 1337', 'Haryana Karnal'))
-
-
-
-
-
-
-
-    #browser.all("#tod-list>li").should(have.size(3))
+                                                                         'Male', '8005553535', '21 November,2001',
+                                                                         'Computer Science, Physics', 'Sports, Reading',
+                                                                         '1.jpg', 'Pushkina Kolotushkina 1337',
+                                                                         'Haryana Karnal'))
