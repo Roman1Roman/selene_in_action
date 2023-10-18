@@ -1,7 +1,4 @@
-import os
-from model.registration_page import RegistrationPage
-from selene import browser, be, have
-
+from demoqa_tests.pages.registration_page import RegistrationPage
 
 reg_page = RegistrationPage()
 
