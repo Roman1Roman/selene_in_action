@@ -2,6 +2,7 @@ from demoqa_tests.pages.registration_page import RegistrationPage
 
 reg_page = RegistrationPage()
 
+
 def test_filling_form():
     reg_page.open_page()
 
@@ -9,14 +10,17 @@ def test_filling_form():
     reg_page.second_name_fill('Bazaleev')
     reg_page.email_fill('bazaleev.roma@ya.ru')
     reg_page.gender_fill('Male')
-    reg_page.phone_fill('8005553535')
-    reg_page.birth_fill()
-    reg_page.subjects_fill('co', 'ph')
-    reg_page.hobbies_fill()
+    reg_page.phone_fill('8800555353')
+    reg_page.birth_fill(year=2001, month=10, day=21)
+    reg_page.subjects_fill('computer science', 'physics')
+    reg_page.hobbies_fill(sports='sports', reading='reading')
     reg_page.download_pic('files/1.jpg')
     reg_page.current_address_fill('Pushkina Kolotushkina 1337')
-    reg_page.state_fill('har')
-    reg_page.city_fill('karn')
+    reg_page.state_fill('haryana')
+    reg_page.city_fill('karnal')
     reg_page.submit()
 
-    reg_page.should_have_words()
+    reg_page.should_have_words('Roman Bazaleev', 'bazaleev.roma@ya.ru',
+                            'Male', '8005553535', 'Computer Science, Physics',
+                               '21 November,2001','1.jpg','Pushkina Kolotushkina 1337',
+                            f'{state='Ha'} Karnal','Sports, Reading')

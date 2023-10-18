@@ -24,18 +24,23 @@ class RegistrationPage:
     def phone_fill(self, phone):
         return browser.element('#userNumber').type(f'{phone}')
 
-    def birth_fill(self):
+    def birth_fill(self, year, month, day):
         browser.element('#dateOfBirthInput').click()
-        browser.element('.react-datepicker__year-select').click().element('option[value="2001"]').click()
-        browser.element('.react-datepicker__month-select').click().element('option[value="10"]').click()
-        browser.element('.react-datepicker__day--021').click()
+        browser.element('.react-datepicker__year-select').click().element(f'option[value="{year}"]').click()
+        browser.element('.react-datepicker__month-select').click().element(f'option[value="{month}"]').click()
+        browser.element(f'.react-datepicker__day--0{day}').click()
 
     def subjects_fill(self, first_subj, second_subj):
-        return browser.element('#subjectsInput').type(f'{first_subj}').press_enter().type(f'{second_subj}').press_enter()
+        return browser.element('#subjectsInput').type(f'{first_subj}').press_enter().type(
+            f'{second_subj}').press_enter()
 
-    def hobbies_fill(self):
-        browser.element('label[for="hobbies-checkbox-1"]').click()
-        browser.element('label[for="hobbies-checkbox-2"]').click()
+    def hobbies_fill(self, sports, music=None, reading=None):
+        if sports == 'sports':
+            browser.element('label[for="hobbies-checkbox-1"]').click()
+        if music == 'music':
+            browser.element('label[for="hobbies-checkbox-3"]').click()
+        if reading == 'reading':
+            browser.element('label[for="hobbies-checkbox-2"]').click()
 
     def download_pic(self, path_to_file):
         browser.element('#uploadPicture').send_keys(os.path.abspath(f'{path_to_file}'))
@@ -52,13 +57,13 @@ class RegistrationPage:
     def submit(self):
         browser.element('#submit').press_enter()
 
-    def should_have_words(self):
+    def should_have_words(self, full_name, email, gender, phone, subjects, birth_date, file_name, address, state, city, hobbies):
         (browser.element('tbody').all('tr td:nth-child(2)')
-         .should(have.texts('Roman Bazaleev', 'bazaleev.roma@ya.ru',
-                                                                             'Male', '8005553535', '21 November,2001',
-                                                                             'Computer Science, Physics',
-                                                                             'Sports, Reading',
-                                                                             '1.jpg', 'Pushkina Kolotushkina 1337',
-                                                                             'Haryana Karnal')))
-
-
+         .should(have.texts(full_name, email,
+                            gender, phone, birth_date,
+                            subjects,
+                            hobbies,
+                            file_name,
+                            address,
+                            state,
+                            city)))
