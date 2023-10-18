@@ -1,22 +1,16 @@
-from model.mid_level_registration.registration_page import RegistrationPage
+from demoqa_tests.data.user import User
+from demoqa_tests.pages.registration_page import RegistrationPage
 
-reg_page = RegistrationPage()
+def test_registration_form():
+     student = User(first_name="Roman", last_name="Bazaleev", email="bazaleev.roma@ya.ru", gender="Male",
+                    first_subject='co', second_subject='ph', phone='8800555353', city="karn", state="har",
+                    current_address='Pushkina Kolotushkina 228', day_birth='21', month_birth='11', year_birth='2001',
+                    downloaded_pic='files/1.jpg')
+     rp = RegistrationPage()
 
-def test_filling_form():
-    reg_page.open_page()
 
-    reg_page.first_name_fill('Roman')
-    reg_page.second_name_fill('Bazaleev')
-    reg_page.email_fill('bazaleev.roma@ya.ru')
-    reg_page.gender_fill('Male')
-    reg_page.phone_fill('8005553535')
-    reg_page.birth_fill()
-    reg_page.subjects_fill('co', 'ph')
-    reg_page.hobbies_fill()
-    reg_page.download_pic('files/1.jpg')
-    reg_page.current_address_fill('Pushkina Kolotushkina 1337')
-    reg_page.state_fill('har')
-    reg_page.city_fill('karn')
-    reg_page.submit()
+     rp.open_page()
 
-    reg_page.should_have_words()
+     rp.filling_registration_form(user=student)
+
+     rp.should_have_by_registered(user=student)
