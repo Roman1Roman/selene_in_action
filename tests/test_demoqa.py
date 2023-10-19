@@ -14,13 +14,13 @@ def test_filling_form():
     reg_page.birth_fill(year=2001, month=10, day=21)
     reg_page.subjects_fill('computer science', 'physics')
     reg_page.hobbies_fill(sports='sports', reading='reading')
-    reg_page.download_pic('files/1.jpg')
+    reg_page.download_pic(file_name='1.jpg')
     reg_page.current_address_fill('Pushkina Kolotushkina 1337')
     reg_page.state_fill('haryana')
     reg_page.city_fill('karnal')
     reg_page.submit()
 
     reg_page.should_have_words('Roman Bazaleev', 'bazaleev.roma@ya.ru',
-                            'Male', '8005553535', 'Computer Science, Physics',
-                               '21 November,2001','1.jpg','Pushkina Kolotushkina 1337',
-                            f'{state='Ha'} Karnal','Sports, Reading')
+                               'Male', '8800555353', 'Computer Science, Physics',
+                               '21 November,2001', '1.jpg', 'Pushkina Kolotushkina 1337',
+                               'Haryana Karnal', 'Sports, Reading')

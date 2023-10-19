@@ -2,7 +2,7 @@ import os
 
 from selene import be, have
 from selene.support.shared import browser
-
+from demoqa_tests.resource import path_file
 
 class RegistrationPage:
 
@@ -42,8 +42,8 @@ class RegistrationPage:
         if reading == 'reading':
             browser.element('label[for="hobbies-checkbox-2"]').click()
 
-    def download_pic(self, path_to_file):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(f'{path_to_file}'))
+    def download_pic(self, file_name):
+        browser.element('#uploadPicture').set_value(path_file(file_name))
 
     def current_address_fill(self, address):
         browser.element('#currentAddress').type(f'{address}').press_enter()
@@ -57,7 +57,7 @@ class RegistrationPage:
     def submit(self):
         browser.element('#submit').press_enter()
 
-    def should_have_words(self, full_name, email, gender, phone, subjects, birth_date, file_name, address, state, city, hobbies):
+    def should_have_words(self, full_name, email, gender, phone, subjects, birth_date, file_name, address, state_city, hobbies):
         (browser.element('tbody').all('tr td:nth-child(2)')
          .should(have.texts(full_name, email,
                             gender, phone, birth_date,
@@ -65,5 +65,4 @@ class RegistrationPage:
                             hobbies,
                             file_name,
                             address,
-                            state,
-                            city)))
+                            state_city)))
