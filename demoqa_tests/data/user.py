@@ -11,10 +11,11 @@ class User:
     phone: str
     first_subject: str
     second_subject: str
-    downloaded_pic: str
     current_address: str
     state: str
     city: str
     day_birth: str
     month_birth: str
     year_birth: str
+    file_name: str
+    hobbies: str
